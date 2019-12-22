@@ -20,13 +20,13 @@ SOURCES += \
     mainwindow.cpp \
     message.cpp \
     qcanal.cpp \
-    reader.cpp
+    writer.cpp
 
 HEADERS += \
     mainwindow.h \
     message.h \
-    qcanal.h \
-    reader.h \
+    qcanal.h \ \
+    writer.h
 
 FORMS += \
     mainwindow.ui

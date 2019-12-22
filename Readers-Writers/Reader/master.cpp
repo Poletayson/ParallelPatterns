@@ -19,15 +19,15 @@ void Master::run()
         while (masterCanal->getIsEmpty());
         QThread::msleep(Message::DELAY);
 
-        if (masterCanal->get().getType() == Message::MAKE_ORDER){
+        if (masterCanal->getData().getType() == Message::MAKE_ORDER){
             toFile("получил заказ");
             storageCanal->put(Message::MATERIALS_REQUEST, QVariant("Стул"));    //запрашивает у склада
             toFile("запросил материалы");
             //ждем отказ или материалы
-            while (masterCanal->get().getType() != Message::MATERIALS_ARE && masterCanal->get().getType() != Message::MATERIALS_ARE_NOT);
+            while (masterCanal->getData().getType() != Message::MATERIALS_ARE && masterCanal->getData().getType() != Message::MATERIALS_ARE_NOT);
             QThread::msleep(Message::DELAY);
             //материалы поступили
-            if (masterCanal->get().getType() == Message::MATERIALS_ARE){
+            if (masterCanal->getData().getType() == Message::MATERIALS_ARE){
 
                 courierCanal->put(Message::ORDER_COMPLETE, QVariant("Стул"));    //заказ готов, курьер должен забрать
                 toFile("передал заказ курьеру");
