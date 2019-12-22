@@ -3,8 +3,6 @@
 #include <QApplication>
 #include <QThread>
 #include <writer.h>
-#include <master.h>
-#include <storage.h>
 
 int main(int argc, char *argv[])
 {

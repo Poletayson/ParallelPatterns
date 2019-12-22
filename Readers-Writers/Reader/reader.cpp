@@ -9,11 +9,9 @@ Reader::Reader(QObject *parent) : QObject(parent)
 }
 
 void Reader::run(){
-//    toFile(dispatcherCanalOrder->key() + " " + QString(dispatcherCanalOrder->isAttached()));
-     //ORDER_COUNT;
     while(true){
         unsigned long delay = static_cast<unsigned long>(qrand()) % MAX_DELAY;
-        toFile(QString ("решил подождать ") + QString::number(delay) + QString ("мс"));
+        toFile(QString ("решил подождать ") + QString::number(delay) + QString ("мс\n"));
         QThread::msleep(delay);
         generalCanal->e->acquire(); // ждем эстафету на ввод
         if(generalCanal->getNumW() > 0) {
@@ -35,7 +33,7 @@ void Reader::run(){
 
 void Reader::read()
 {
-    toFile(QString ("\nсчитал данные: ") + QString::number(generalCanal->getData()));
+    toFile(QString ("считал данные: ") + QString::number(generalCanal->getData()));
 }
 
 void Reader::toFile(QString str)

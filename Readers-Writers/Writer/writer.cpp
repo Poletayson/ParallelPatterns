@@ -9,11 +9,9 @@ Writer::Writer(QObject *parent) : QObject(parent)
 }
 
 void Writer::run(){
-//    toFile(dispatcherCanalOrder->key() + " " + QString(dispatcherCanalOrder->isAttached()));
-     //ORDER_COUNT;
     while(true){
         unsigned long delay = static_cast<unsigned long>(qrand()) % MAX_DELAY + 500;
-        toFile(QString ("решил подождать ") + QString::number(delay) + QString ("мс"));
+        toFile(QString ("решил подождать ") + QString::number(delay) + QString ("мс\n"));
         QThread::msleep(delay);
         generalCanal->e->acquire(); // ждем эстафету на ввод
         if(generalCanal->getNumW() > 0 || generalCanal->getNumR() > 0) {
@@ -35,8 +33,9 @@ void Writer::run(){
 
 void Writer::write()
 {
+    QThread::msleep(static_cast<unsigned long>(qrand()) % 100 + 50);
     generalCanal->put(WRITER_ID);
-    toFile(QString ("\nзаписал данные: ") + QString::number(generalCanal->getData()));
+    toFile(QString ("записал данные: ") + QString::number(generalCanal->getData()));
 }
 
 void Writer::toFile(QString str)
